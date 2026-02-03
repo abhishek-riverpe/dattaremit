@@ -2,6 +2,28 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Check } from "lucide-react";
 
+const comparisonData = [
+  {
+    provider: "Traditional Bank",
+    amount: "₹80,100",
+    fees: "$30",
+    time: "3-5 days",
+  },
+  {
+    provider: "DattaPay",
+    amount: "₹84,520",
+    fees: "$0",
+    time: "<1 min",
+    highlight: true,
+  },
+  {
+    provider: "Wire Transfer",
+    amount: "₹81,200",
+    fees: "$45",
+    time: "1-2 days",
+  },
+];
+
 export function ComparisonSection() {
   return (
     <section className="py-24 bg-muted/30">
@@ -15,26 +37,116 @@ export function ComparisonSection() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-          <ComparisonCard
-            provider="Traditional Bank"
-            amount="80,100"
-            fees="$30"
-            time="3-5 days"
-          />
-          <ComparisonCard
-            provider="DattaPay"
-            amount="84,520"
-            fees="$0"
-            time="<1 min"
-            highlight
-          />
-          <ComparisonCard
-            provider="Wire Transfer"
-            amount="81,200"
-            fees="$45"
-            time="1-2 days"
-          />
+        {/* Desktop Table */}
+        <div className="hidden md:block max-w-3xl mx-auto">
+          <div className="rounded-xl border bg-background overflow-hidden">
+            {/* Header Row */}
+            <div className="grid grid-cols-4 bg-muted/50 text-sm font-medium text-muted-foreground">
+              <div className="px-6 py-4">Provider</div>
+              <div className="px-6 py-4">You Get</div>
+              <div className="px-6 py-4">Fees</div>
+              <div className="px-6 py-4">Time</div>
+            </div>
+
+            {/* Data Rows */}
+            <div className="divide-y">
+              {comparisonData.map((row) => (
+                <div
+                  key={row.provider}
+                  className={`grid grid-cols-4 ${
+                    row.highlight
+                      ? "border-l-4 border-l-primary bg-primary/5 font-semibold"
+                      : ""
+                  }`}
+                >
+                  <div className="px-6 py-4">
+                    {row.provider}
+                  </div>
+                  <div
+                    className={`px-6 py-4 font-semibold ${
+                      row.highlight ? "text-primary" : ""
+                    }`}
+                  >
+                    {row.amount}
+                  </div>
+                  <div
+                    className={`px-6 py-4 ${
+                      row.highlight && row.fees === "$0"
+                        ? "text-primary font-medium"
+                        : ""
+                    }`}
+                  >
+                    {row.fees}
+                  </div>
+                  <div className="px-6 py-4">
+                    <div>{row.time}</div>
+                    {row.highlight && (
+                      <div className="flex items-center gap-1 text-sm text-primary mt-1">
+                        <Check className="size-4" />
+                        <span>Save ₹4,420</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Layout */}
+        <div className="md:hidden max-w-sm mx-auto">
+          <div className="rounded-xl border bg-background overflow-hidden divide-y">
+            {comparisonData.map((row) => (
+              <div
+                key={row.provider}
+                className={`p-4 ${
+                  row.highlight
+                    ? "border-l-4 border-l-primary bg-primary/5 font-semibold"
+                    : ""
+                }`}
+              >
+                <div className="mb-3">
+                  {row.provider}
+                </div>
+
+                <div className="grid grid-cols-3 gap-2 text-sm">
+                  <div>
+                    <div className="text-muted-foreground text-xs">You Get</div>
+                    <div
+                      className={`font-semibold ${
+                        row.highlight ? "text-primary" : ""
+                      }`}
+                    >
+                      {row.amount}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-muted-foreground text-xs">Fees</div>
+                    <div
+                      className={
+                        row.highlight && row.fees === "$0"
+                          ? "text-primary font-medium"
+                          : ""
+                      }
+                    >
+                      {row.fees}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-muted-foreground text-xs">Time</div>
+                    <div>{row.time}</div>
+                  </div>
+                </div>
+
+                {row.highlight && (
+                  <div className="flex items-center gap-1 text-sm text-primary mt-3 pt-3 border-t">
+                    <Check className="size-4" />
+                    <span>You save ₹4,420</span>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="text-center mt-10">
@@ -47,59 +159,5 @@ export function ComparisonSection() {
         </div>
       </div>
     </section>
-  );
-}
-
-function ComparisonCard({
-  provider,
-  amount,
-  fees,
-  time,
-  highlight = false,
-}: {
-  provider: string;
-  amount: string;
-  fees: string;
-  time: string;
-  highlight?: boolean;
-}) {
-  return (
-    <div
-      className={`relative rounded-2xl p-6 bg-background border ${
-        highlight ? 'border-primary ring-1 ring-primary' : 'border-border'
-      }`}
-    >
-      {highlight && (
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-primary text-primary-foreground text-xs font-medium rounded-full">
-          Best Value
-        </div>
-      )}
-
-      <div className="text-sm text-muted-foreground mb-2">{provider}</div>
-
-      <div className={`text-3xl font-bold mb-4 ${highlight ? 'text-primary' : ''}`}>
-        ₹{amount}
-      </div>
-
-      <div className="space-y-2 text-sm">
-        <div className="flex justify-between">
-          <span className="text-muted-foreground">Fees</span>
-          <span className={`font-medium ${highlight && fees === '$0' ? 'text-primary' : ''}`}>
-            {fees}
-          </span>
-        </div>
-        <div className="flex justify-between">
-          <span className="text-muted-foreground">Time</span>
-          <span className="font-medium">{time}</span>
-        </div>
-      </div>
-
-      {highlight && (
-        <div className="mt-4 pt-4 border-t flex items-center gap-2 text-sm text-primary">
-          <Check className="size-4" />
-          <span>You save ₹4,420</span>
-        </div>
-      )}
-    </div>
   );
 }
