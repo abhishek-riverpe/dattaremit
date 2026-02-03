@@ -12,9 +12,125 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const siteUrl = "https://dattapay.com";
+
 export const metadata: Metadata = {
-  title: "DattaPay - Money without borders",
-  description: "Global banking and payments that is low-cost, instant and secure. Powered by regulated stablecoins.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "DattaPay - Money without borders",
+    template: "%s | DattaPay",
+  },
+  description:
+    "Send money internationally with zero fees, instant transfers, and the best exchange rates. Global banking and payments powered by regulated stablecoins.",
+  keywords: [
+    "international money transfer",
+    "send money abroad",
+    "remittance",
+    "USD to INR",
+    "zero fee transfer",
+    "instant money transfer",
+    "stablecoin payments",
+    "global payments",
+    "cross-border payments",
+    "DattaPay",
+  ],
+  authors: [{ name: "DattaPay" }],
+  creator: "DattaPay",
+  publisher: "DattaPay",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: siteUrl,
+    siteName: "DattaPay",
+    title: "DattaPay - Money without borders",
+    description:
+      "Send money internationally with zero fees, instant transfers, and the best exchange rates. Global banking and payments powered by regulated stablecoins.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "DattaPay - Money without borders",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DattaPay - Money without borders",
+    description:
+      "Send money internationally with zero fees, instant transfers, and the best exchange rates.",
+    images: ["/og-image.png"],
+    creator: "@dattapay",
+  },
+  verification: {
+    // Add these when you have the verification codes
+    // google: "your-google-verification-code",
+    // yandex: "your-yandex-verification-code",
+  },
+  alternates: {
+    canonical: siteUrl,
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}/#organization`,
+      name: "DattaPay",
+      url: siteUrl,
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteUrl}/logo.png`,
+      },
+      sameAs: [
+        "https://twitter.com/dattapay",
+        "https://linkedin.com/company/dattapay",
+      ],
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "customer service",
+        email: "support@dattapay.com",
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: siteUrl,
+      name: "DattaPay",
+      publisher: {
+        "@id": `${siteUrl}/#organization`,
+      },
+      description:
+        "Send money internationally with zero fees, instant transfers, and the best exchange rates.",
+    },
+    {
+      "@type": "FinancialService",
+      "@id": `${siteUrl}/#financialservice`,
+      name: "DattaPay",
+      description:
+        "International money transfer service with zero fees and instant transfers powered by stablecoins.",
+      url: siteUrl,
+      priceRange: "Free",
+      areaServed: {
+        "@type": "Country",
+        name: "Worldwide",
+      },
+      serviceType: "International Money Transfer",
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -24,6 +140,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

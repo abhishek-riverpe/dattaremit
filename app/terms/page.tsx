@@ -1,5 +1,21 @@
+import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/sections/Footer";
+
+export const metadata: Metadata = {
+  title: "Terms of Service",
+  description:
+    "Read DattaPay's terms of service. Understand your rights and responsibilities when using our international money transfer services.",
+  openGraph: {
+    title: "Terms of Service | DattaPay",
+    description:
+      "Read DattaPay's terms of service for our international money transfer services.",
+    url: "https://dattapay.com/terms",
+  },
+  alternates: {
+    canonical: "https://dattapay.com/terms",
+  },
+};
 
 const sections = [
   { title: "1. Acceptance of Terms", content: "By accessing or using the DattaPay service (\"Service\"), you agree to be bound by these Terms of Service (\"Terms\"). If you do not agree to these Terms, do not use the Service. We reserve the right to modify these Terms at any time." },

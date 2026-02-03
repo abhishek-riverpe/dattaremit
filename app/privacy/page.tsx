@@ -1,5 +1,21 @@
+import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/sections/Footer";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description:
+    "Learn how DattaPay collects, uses, and protects your personal information. Our commitment to your privacy and data security.",
+  openGraph: {
+    title: "Privacy Policy | DattaPay",
+    description:
+      "Learn how DattaPay collects, uses, and protects your personal information.",
+    url: "https://dattapay.com/privacy",
+  },
+  alternates: {
+    canonical: "https://dattapay.com/privacy",
+  },
+};
 
 const sections = [
   { title: "1. Information We Collect", content: "We collect information you provide directly, including name, email, phone, date of birth, government ID details, bank information, and transaction history. We also collect device information, IP addresses, and usage data." },

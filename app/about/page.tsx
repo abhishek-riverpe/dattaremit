@@ -1,6 +1,22 @@
+import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { Building2, Users } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "About Us",
+  description:
+    "Meet the team behind DattaPay. Built by industry veterans from Urban Company, Pine Labs, and top IITs/IIMs, backed by leading investors.",
+  openGraph: {
+    title: "About Us | DattaPay",
+    description:
+      "Meet the team behind DattaPay. Built by industry veterans from Urban Company, Pine Labs, and top IITs/IIMs.",
+    url: "https://dattapay.com/about",
+  },
+  alternates: {
+    canonical: "https://dattapay.com/about",
+  },
+};
 
 const founders = [
   {

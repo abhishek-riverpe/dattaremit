@@ -1,7 +1,23 @@
+import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Calendar, Clock, BookOpen } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Blog",
+  description:
+    "Stay informed about cross-border payments, international money transfer tips, exchange rates, and the latest fintech trends from DattaPay.",
+  openGraph: {
+    title: "Blog | DattaPay",
+    description:
+      "Stay informed about cross-border payments, international money transfer tips, and fintech trends.",
+    url: "https://dattapay.com/blogs",
+  },
+  alternates: {
+    canonical: "https://dattapay.com/blogs",
+  },
+};
 
 const blogPosts = [
   {

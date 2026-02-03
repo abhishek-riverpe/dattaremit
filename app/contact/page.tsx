@@ -1,7 +1,23 @@
+import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { Button } from "@/components/ui/button";
 import { Mail, MapPin, MessageSquare } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Contact Us",
+  description:
+    "Get in touch with DattaPay. We're here to help with questions about international money transfers, account support, and more.",
+  openGraph: {
+    title: "Contact Us | DattaPay",
+    description:
+      "Get in touch with DattaPay. We're here to help with questions about international money transfers.",
+    url: "https://dattapay.com/contact",
+  },
+  alternates: {
+    canonical: "https://dattapay.com/contact",
+  },
+};
 
 export default function ContactPage() {
   return (
