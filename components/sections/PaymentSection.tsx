@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CreditCard, Shield, Zap } from "lucide-react";
 
@@ -45,9 +46,11 @@ export function PaymentSection() {
               Connect your bank account once and send money anytime. No cards, no hassle.
             </p>
 
-            <Button size="xl" className="group">
-              Send Money
-              <ArrowRight className="size-5 group-hover:translate-x-1 transition-transform" />
+            <Button size="xl" className="group" asChild>
+              <Link href="/contact">
+                Send Money
+                <ArrowRight className="size-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
             </Button>
           </div>
         </div>

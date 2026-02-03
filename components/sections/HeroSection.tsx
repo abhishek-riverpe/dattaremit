@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
@@ -22,9 +23,11 @@ export function HeroSection() {
               Global banking and payments that is low-cost, instant and secure.
             </p>
 
-            <Button size="xl" className="group">
-              Open an Account
-              <ArrowRight className="size-5 group-hover:translate-x-1 transition-transform" />
+            <Button size="xl" className="group" asChild>
+              <Link href="/contact">
+                Open an Account
+                <ArrowRight className="size-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
             </Button>
           </div>
 

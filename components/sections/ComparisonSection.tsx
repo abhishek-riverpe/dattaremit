@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Check } from "lucide-react";
 
@@ -37,9 +38,11 @@ export function ComparisonSection() {
         </div>
 
         <div className="text-center mt-10">
-          <Button size="xl" className="group">
-            Send Money
-            <ArrowRight className="size-5 group-hover:translate-x-1 transition-transform" />
+          <Button size="xl" className="group" asChild>
+            <Link href="/contact">
+              Send Money
+              <ArrowRight className="size-5 group-hover:translate-x-1 transition-transform" />
+            </Link>
           </Button>
         </div>
       </div>
