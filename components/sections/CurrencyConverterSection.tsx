@@ -46,7 +46,7 @@ export function CurrencyConverterSection() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://api.frankfurter.app/latest?from=${currencyCode}&to=INR`
+        `https://api.frankfurter.app/latest?from=${currencyCode}&to=INR`,
       );
       const data = await response.json();
       setExchangeRate(data.rates?.INR || null);
@@ -141,13 +141,15 @@ export function CurrencyConverterSection() {
                     />
 
                     {/* Currency Selector */}
-                    <div className="relative flex-shrink-0" ref={dropdownRef}>
+                    <div className="relative shrink-0" ref={dropdownRef}>
                       <button
                         type="button"
                         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                         className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-3 sm:py-4 bg-muted/50 hover:bg-muted transition-colors border-l border-border rounded-r-lg sm:rounded-r-xl cursor-pointer"
                       >
-                        <span className="text-lg sm:text-xl">{selectedCurrency.flag}</span>
+                        <span className="text-lg sm:text-xl">
+                          {selectedCurrency.flag}
+                        </span>
                         <span className="font-semibold text-foreground text-sm sm:text-base">
                           {selectedCurrency.code}
                         </span>
@@ -160,8 +162,8 @@ export function CurrencyConverterSection() {
 
                       {/* Dropdown */}
                       {isDropdownOpen && (
-                        <div className="absolute right-0 top-full mt-2 w-48 sm:w-56 bg-card border border-border rounded-lg sm:rounded-xl shadow-2xl z-[100] animate-in fade-in-0 zoom-in-95 duration-200">
-                          <div className="max-h-[240px] sm:max-h-[280px] overflow-y-auto py-1 scrollbar-thin scrollbar-thumb-muted scrollbar-track-transparent">
+                        <div className="absolute right-0 top-full mt-2 w-48 sm:w-56 bg-card border border-border rounded-lg sm:rounded-xl shadow-2xl z-100 animate-in fade-in-0 zoom-in-95 duration-200">
+                          <div className="max-h-60 sm:max-h-70 overflow-y-auto py-1 scrollbar-thin scrollbar-thumb-muted scrollbar-track-transparent">
                             {currencies.map((currency) => (
                               <button
                                 key={currency.code}
@@ -173,7 +175,9 @@ export function CurrencyConverterSection() {
                                     : ""
                                 }`}
                               >
-                                <span className="text-lg sm:text-xl">{currency.flag}</span>
+                                <span className="text-lg sm:text-xl">
+                                  {currency.flag}
+                                </span>
                                 <div className="flex-1 min-w-0">
                                   <div className="font-medium text-foreground text-sm sm:text-base">
                                     {currency.code}
@@ -183,7 +187,7 @@ export function CurrencyConverterSection() {
                                   </div>
                                 </div>
                                 {selectedCurrency.code === currency.code && (
-                                  <div className="size-1.5 sm:size-2 rounded-full bg-primary flex-shrink-0" />
+                                  <div className="size-1.5 sm:size-2 rounded-full bg-primary shrink-0" />
                                 )}
                               </button>
                             ))}
@@ -225,13 +229,13 @@ export function CurrencyConverterSection() {
                           Exchange rate
                         </span>
                         <span className="font-medium text-primary">
-                          1 {selectedCurrency.code} = {exchangeRate.toFixed(2)} INR
+                          1 {selectedCurrency.code} = {exchangeRate.toFixed(2)}{" "}
+                          INR
                         </span>
                       </div>
                     </div>
                   )}
                 </div>
-
               </div>
             </div>
           </div>
