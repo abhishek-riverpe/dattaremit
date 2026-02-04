@@ -38,7 +38,7 @@ export function HeroSection() {
               alt="DattaRemit App"
               width={750}
               height={750}
-              className="relative z-10 w-[90%] md:w-auto h-auto md:max-w-112.5 lg:max-w-137.5"
+              className="relative z-10 w-full h-auto"
               priority
             />
           </div>
