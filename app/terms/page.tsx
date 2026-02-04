@@ -5,27 +5,27 @@ import { Footer } from "@/components/sections/Footer";
 export const metadata: Metadata = {
   title: "Terms of Service",
   description:
-    "Read DattaPay's terms of service. Understand your rights and responsibilities when using our international money transfer services.",
+    "Read DattaRemit's terms of service. Understand your rights and responsibilities when using our international money transfer services.",
   openGraph: {
-    title: "Terms of Service | DattaPay",
+    title: "Terms of Service | DattaRemit",
     description:
-      "Read DattaPay's terms of service for our international money transfer services.",
-    url: "https://dattapay.com/terms",
+      "Read DattaRemit's terms of service for our international money transfer services.",
+    url: "https://dattaremit.com/terms",
   },
   alternates: {
-    canonical: "https://dattapay.com/terms",
+    canonical: "https://dattaremit.com/terms",
   },
 };
 
 const sections = [
-  { title: "1. Acceptance of Terms", content: "By accessing or using the DattaPay service (\"Service\"), you agree to be bound by these Terms of Service (\"Terms\"). If you do not agree to these Terms, do not use the Service. We reserve the right to modify these Terms at any time." },
-  { title: "2. Eligibility", content: "You must be at least 18 years old and have the legal capacity to enter into a binding agreement. By using DattaPay, you represent that you meet these requirements and that all information you provide is accurate." },
+  { title: "1. Acceptance of Terms", content: "By accessing or using the DattaRemit service (\"Service\"), you agree to be bound by these Terms of Service (\"Terms\"). If you do not agree to these Terms, do not use the Service. We reserve the right to modify these Terms at any time." },
+  { title: "2. Eligibility", content: "You must be at least 18 years old and have the legal capacity to enter into a binding agreement. By using DattaRemit, you represent that you meet these requirements and that all information you provide is accurate." },
   { title: "3. Account Registration", content: "To use our Service, you must create an account and complete identity verification. You are responsible for maintaining the confidentiality of your credentials and for all activities under your account." },
-  { title: "4. Money Transfer Services", content: "DattaPay provides international money transfer services subject to applicable laws. Transfer amounts, delivery times, and methods may vary based on destination, payment method, and regulatory requirements." },
+  { title: "4. Money Transfer Services", content: "DattaRemit provides international money transfer services subject to applicable laws. Transfer amounts, delivery times, and methods may vary based on destination, payment method, and regulatory requirements." },
   { title: "5. Fees and Exchange Rates", content: "Fees and exchange rates are disclosed before you confirm each transfer. Exchange rates fluctuate and the rate applied is the rate at confirmation. We may change our fee structure with notice to existing customers." },
   { title: "6. Prohibited Activities", content: "You agree not to use the Service for any unlawful purpose, including money laundering, terrorist financing, fraud, or any other illegal activity. We reserve the right to suspend accounts and report to authorities." },
-  { title: "7. Limitation of Liability", content: "To the fullest extent permitted by law, DattaPay shall not be liable for any indirect, incidental, special, consequential, or punitive damages. Our total liability shall not exceed fees paid in the twelve months preceding the claim." },
-  { title: "8. Contact Information", content: "If you have questions about these Terms, contact us at legal@dattapay.com or write to: DattaPay, 100 Financial District, Suite 400, San Francisco, CA 94111." },
+  { title: "7. Limitation of Liability", content: "To the fullest extent permitted by law, DattaRemit shall not be liable for any indirect, incidental, special, consequential, or punitive damages. Our total liability shall not exceed fees paid in the twelve months preceding the claim." },
+  { title: "8. Contact Information", content: "If you have questions about these Terms, contact us at legal@dattaremit.com or write to: DattaRemit, 100 Financial District, Suite 400, San Francisco, CA 94111." },
 ];
 
 export default function TermsPage() {

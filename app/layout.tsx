@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { ChatWidget } from "@/components/chat-widget";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,13 +13,13 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = "https://dattapay.com";
+const siteUrl = "https://dattaremit.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "DattaPay - Money without borders",
-    template: "%s | DattaPay",
+    default: "DattaRemit - Money without borders",
+    template: "%s | DattaRemit",
   },
   description:
     "Send money internationally with zero fees, instant transfers, and the best exchange rates. Global banking and payments powered by regulated stablecoins.",
@@ -32,11 +33,11 @@ export const metadata: Metadata = {
     "stablecoin payments",
     "global payments",
     "cross-border payments",
-    "DattaPay",
+    "DattaRemit",
   ],
-  authors: [{ name: "DattaPay" }],
-  creator: "DattaPay",
-  publisher: "DattaPay",
+  authors: [{ name: "DattaRemit" }],
+  creator: "DattaRemit",
+  publisher: "DattaRemit",
   robots: {
     index: true,
     follow: true,
@@ -52,8 +53,8 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: siteUrl,
-    siteName: "DattaPay",
-    title: "DattaPay - Money without borders",
+    siteName: "DattaRemit",
+    title: "DattaRemit - Money without borders",
     description:
       "Send money internationally with zero fees, instant transfers, and the best exchange rates. Global banking and payments powered by regulated stablecoins.",
     images: [
@@ -61,17 +62,17 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "DattaPay - Money without borders",
+        alt: "DattaRemit - Money without borders",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "DattaPay - Money without borders",
+    title: "DattaRemit - Money without borders",
     description:
       "Send money internationally with zero fees, instant transfers, and the best exchange rates.",
     images: ["/og-image.png"],
-    creator: "@dattapay",
+    creator: "@dattaremit",
   },
   verification: {
     // Add these when you have the verification codes
@@ -89,27 +90,27 @@ const jsonLd = {
     {
       "@type": "Organization",
       "@id": `${siteUrl}/#organization`,
-      name: "DattaPay",
+      name: "DattaRemit",
       url: siteUrl,
       logo: {
         "@type": "ImageObject",
         url: `${siteUrl}/logo.png`,
       },
       sameAs: [
-        "https://twitter.com/dattapay",
-        "https://linkedin.com/company/dattapay",
+        "https://twitter.com/dattaremit",
+        "https://linkedin.com/company/dattaremit",
       ],
       contactPoint: {
         "@type": "ContactPoint",
         contactType: "customer service",
-        email: "support@dattapay.com",
+        email: "support@dattaremit.com",
       },
     },
     {
       "@type": "WebSite",
       "@id": `${siteUrl}/#website`,
       url: siteUrl,
-      name: "DattaPay",
+      name: "DattaRemit",
       publisher: {
         "@id": `${siteUrl}/#organization`,
       },
@@ -119,7 +120,7 @@ const jsonLd = {
     {
       "@type": "FinancialService",
       "@id": `${siteUrl}/#financialservice`,
-      name: "DattaPay",
+      name: "DattaRemit",
       description:
         "International money transfer service with zero fees and instant transfers powered by stablecoins.",
       url: siteUrl,
@@ -150,6 +151,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        <ChatWidget />
       </body>
     </html>
   );

@@ -10,9 +10,9 @@ const footerLinks = [
 ];
 
 const socialLinks = [
-  { href: "https://www.linkedin.com/company/dattapay/home", label: "LinkedIn", icon: LinkedInIcon },
-  { href: "https://www.instagram.com/dattapay.global/", label: "Instagram", icon: InstagramIcon },
-  { href: "https://x.com/dattapayglobal", label: "X", icon: TwitterIcon },
+  { href: "https://www.linkedin.com/company/dattaremit/home", label: "LinkedIn", icon: LinkedInIcon },
+  { href: "https://www.instagram.com/dattaremit.global/", label: "Instagram", icon: InstagramIcon },
+  { href: "https://x.com/dattaremitglobal", label: "X", icon: TwitterIcon },
 ];
 
 export function Footer() {
@@ -23,13 +23,13 @@ export function Footer() {
           <div className="lg:col-span-2">
             <Image
               src="/logo.png"
-              alt="DattaPay Logo"
+              alt="DattaRemit Logo"
               width={120}
               height={40}
               className="h-10 w-auto mb-6"
             />
             <p className="text-muted-foreground text-sm max-w-md mb-8">
-              DattaPay facilitates cross-border payments through regulated financial partners.
+              DattaRemit facilitates cross-border payments through regulated financial partners.
             </p>
           </div>
 
@@ -50,14 +50,14 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-semibold mb-4">Download DattaPay</h3>
+            <h3 className="font-semibold mb-4">Download DattaRemit</h3>
             <AppDownloadButtons direction="column" />
           </div>
         </div>
 
         <div className="border-t border-border mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-muted-foreground text-sm">
-            Copyright &copy; DattaPay {new Date().getFullYear()}. All rights reserved
+            Copyright &copy; DattaRemit {new Date().getFullYear()}. All rights reserved
           </p>
 
           <div className="flex items-center gap-4">

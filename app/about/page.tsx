@@ -6,15 +6,15 @@ import { Building2, Users } from "lucide-react";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Meet the team behind DattaPay. Built by industry veterans from Urban Company, Pine Labs, and top IITs/IIMs, backed by leading investors.",
+    "Meet the team behind DattaRemit. Built by industry veterans from Urban Company, Pine Labs, and top IITs/IIMs, backed by leading investors.",
   openGraph: {
-    title: "About Us | DattaPay",
+    title: "About Us | DattaRemit",
     description:
-      "Meet the team behind DattaPay. Built by industry veterans from Urban Company, Pine Labs, and top IITs/IIMs.",
-    url: "https://dattapay.com/about",
+      "Meet the team behind DattaRemit. Built by industry veterans from Urban Company, Pine Labs, and top IITs/IIMs.",
+    url: "https://dattaremit.com/about",
   },
   alternates: {
-    canonical: "https://dattapay.com/about",
+    canonical: "https://dattaremit.com/about",
   },
 };
 

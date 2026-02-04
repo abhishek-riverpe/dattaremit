@@ -1,145 +1,355 @@
-import type { Metadata } from "next";
+"use client";
+
+import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import axios from "axios";
+import {
+  ArrowRight,
+  Check,
+  Mail,
+  Clock,
+  Globe,
+  TrendingUp,
+  Shield,
+  BadgePercent,
+  Loader2,
+  AlertCircle,
+} from "lucide-react";
+import apiClient from "@/lib/api-client";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { Button } from "@/components/ui/button";
-import { Mail, MapPin, MessageSquare } from "lucide-react";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 
-export const metadata: Metadata = {
-  title: "Contact Us",
-  description:
-    "Get in touch with DattaPay. We're here to help with questions about international money transfers, account support, and more.",
-  openGraph: {
-    title: "Contact Us | DattaPay",
-    description:
-      "Get in touch with DattaPay. We're here to help with questions about international money transfers.",
-    url: "https://dattapay.com/contact",
+const schema = yup.object({
+  fullName: yup
+    .string()
+    .required("Full name is required")
+    .min(2, "Name must be at least 2 characters"),
+  email: yup
+    .string()
+    .required("Email is required")
+    .email("Please enter a valid email address"),
+  whatsapp: yup
+    .string()
+    .required("WhatsApp number is required")
+    .min(10, "Please enter a valid phone number"),
+  message: yup
+    .string()
+    .required("Message is required")
+    .min(10, "Message must be at least 10 characters")
+    .max(2000, "Message must be at most 2000 characters"),
+});
+
+type FormData = yup.InferType<typeof schema>;
+
+const features = [
+  {
+    icon: Globe,
+    text: "Receive payments in USD & EUR",
   },
-  alternates: {
-    canonical: "https://dattapay.com/contact",
+  {
+    icon: TrendingUp,
+    text: "Earn 4.2% APY on idle funds",
   },
-};
+  {
+    icon: BadgePercent,
+    text: "Flat 0.5% fee - no hidden charges",
+  },
+  {
+    icon: Shield,
+    text: "Bank-grade security & compliance",
+  },
+  {
+    icon: Shield,
+    text: "SOC 2 Type II compliant infrastructure",
+  },
+];
 
 export default function ContactPage() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const form = useForm<FormData>({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      fullName: "",
+      email: "",
+      whatsapp: "",
+      message: "",
+    },
+  });
+
+  // Auto-dismiss success message after 5 seconds
+  useEffect(() => {
+    if (isSuccess) {
+      const timer = setTimeout(() => {
+        setIsSuccess(false);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [isSuccess]);
+
+  const onSubmit = async (data: FormData) => {
+    setIsLoading(true);
+    setIsError(false);
+    setIsSuccess(false);
+    try {
+      await apiClient.post("/contact", {...data, "source": "DATTAREMIT"});
+
+      setIsSuccess(true);
+      form.reset();
+    } catch (error) {
+      console.error("Submission error:", error);
+      setIsError(true);
+      if (axios.isAxiosError(error) && error.response?.data?.error) {
+        setErrorMessage(error.response.data.error);
+      } else {
+        setErrorMessage("Network error. Please check your connection and try again.");
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <>
+    <div className="min-h-screen">
       <Navbar />
-      <main className="pt-20">
-        <section className="py-24 bg-gradient-to-br from-primary/5 via-background to-primary/10 relative overflow-hidden">
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl" />
-            <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
-          </div>
+      <main className="relative py-16 sm:py-24 overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
 
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
-                Get in touch
+        <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left Column - Content */}
+            <div>
+              <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-secondary/50 px-4 py-1.5 text-sm text-muted-foreground mb-6">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75"></span>
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
+                </span>
+                Now accepting early access requests
+              </div>
+
+              <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-foreground mb-6">
+                Get In Touch
               </h1>
-              <p className="text-xl text-muted-foreground">
-                We&apos;d love to hear from you. Reach out with questions, feedback, or just to say hello.
+
+              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                Ready to revolutionize how you receive international payments?
+                Join thousands of freelancers who are saving on fees and earning
+                yield on their hard-earned money.
               </p>
-            </div>
-          </div>
-        </section>
 
-        <section className="py-24 bg-background">
-          <div className="container mx-auto px-4">
-            <div className="grid lg:grid-cols-2 gap-16 max-w-5xl mx-auto">
-              <div>
-                <h2 className="text-3xl font-bold mb-8">Contact Information</h2>
-
-                <div className="space-y-8">
-                  <div className="flex gap-4">
-                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                      <Mail className="size-5 text-primary" />
+              {/* Features */}
+              <div className="space-y-4 mb-10">
+                {features.map((feature) => (
+                  <div key={feature.text} className="flex items-center gap-3">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
+                      <feature.icon className="h-4 w-4 text-primary" />
                     </div>
-                    <div>
-                      <h3 className="font-semibold mb-1">Email</h3>
-                      <a
-                        href="mailto:support@dattapay.com"
-                        className="text-muted-foreground hover:text-primary transition-colors"
-                      >
-                        support@dattapay.com
-                      </a>
-                    </div>
+                    <span className="text-foreground font-medium">
+                      {feature.text}
+                    </span>
                   </div>
+                ))}
+              </div>
 
-                  <div className="flex gap-4">
-                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                      <MessageSquare className="size-5 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-1">In-App Support</h3>
-                      <p className="text-muted-foreground">
-                        Chat with us directly in the DattaPay app for instant support
-                      </p>
-                    </div>
+              {/* Contact Info */}
+              <div className="border-t border-border/50 pt-8">
+                <p className="text-sm font-medium text-foreground mb-4">
+                  Have questions? Reach out directly:
+                </p>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3 text-muted-foreground">
+                    <Mail className="h-4 w-4" />
+                    <a
+                      href="mailto:support@dattaremit.com"
+                      className="hover:text-primary transition-colors"
+                    >
+                      support@dattaremit.com
+                    </a>
                   </div>
-
-                  <div className="flex gap-4">
-                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                      <MapPin className="size-5 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-1">Office</h3>
-                      <p className="text-muted-foreground">
-                        Bangalore, India
-                      </p>
-                    </div>
+                  <div className="flex items-center gap-3 text-muted-foreground">
+                    <Clock className="h-4 w-4" />
+                    <span>Response time: Within 24 hours</span>
                   </div>
                 </div>
               </div>
+            </div>
 
-              <div className="bg-card rounded-3xl border shadow-lg p-8">
-                <h2 className="text-2xl font-bold mb-6">Send us a message</h2>
+            {/* Right Column - Form */}
+            <div>
+              <div className="rounded-2xl border border-border/50 bg-card p-6 sm:p-8 shadow-xl">
+                <div className="mb-6">
+                  <h2 className="text-xl font-semibold text-foreground mb-2">
+                    Request Early Access
+                  </h2>
+                  <p className="text-sm text-muted-foreground">
+                    Fill out the form and we'll get back to you shortly.
+                  </p>
+                </div>
 
-                <form className="space-y-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium mb-2">
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      className="w-full h-12 px-4 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary/50"
-                      placeholder="Your name"
+                <Form {...form}>
+                  <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="space-y-5"
+                  >
+                    {/* Full Name */}
+                    <FormField
+                      control={form.control}
+                      name="fullName"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Full Name</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="John Doe"
+                              {...field}
+                              className="h-11"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
                     />
-                  </div>
 
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium mb-2">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      className="w-full h-12 px-4 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary/50"
-                      placeholder="your@email.com"
+                    {/* Email */}
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Email Address</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="email"
+                              placeholder="john@example.com"
+                              {...field}
+                              className="h-11"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
                     />
-                  </div>
 
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium mb-2">
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      rows={4}
-                      className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none"
-                      placeholder="How can we help you?"
+                    {/* WhatsApp */}
+                    <FormField
+                      control={form.control}
+                      name="whatsapp"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>WhatsApp Number</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="tel"
+                              placeholder="+1 234 567 8900"
+                              {...field}
+                              className="h-11"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
                     />
-                  </div>
 
-                  <Button size="xl" className="w-full">
-                    Send Message
-                  </Button>
-                </form>
+                    {/* Message */}
+                    <FormField
+                      control={form.control}
+                      name="message"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Message</FormLabel>
+                          <FormControl>
+                            <textarea
+                              placeholder="Tell us about your needs..."
+                              {...field}
+                              className="flex min-h-25 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Submit Button */}
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className="w-full rounded-full text-base mt-2"
+                      disabled={isLoading}
+                    >
+                      {isLoading ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Submitting...
+                        </>
+                      ) : (
+                        <>
+                          Request Access
+                          <ArrowRight className="ml-2 h-4 w-4" />
+                        </>
+                      )}
+                    </Button>
+                  </form>
+                </Form>
+
+                {/* Success Message */}
+                {isSuccess && (
+                  <div className="mt-6 rounded-lg bg-green-50 dark:bg-green-900/20 p-4 text-center">
+                    <div className="flex items-center justify-center gap-2 text-green-600 dark:text-green-400">
+                      <Check className="h-5 w-5" />
+                      <span className="font-medium">
+                        Request submitted successfully!
+                      </span>
+                    </div>
+                    <p className="mt-1 text-sm text-green-600/80 dark:text-green-400/80">
+                      We'll be in touch within 24 hours.
+                    </p>
+                  </div>
+                )}
+
+                {/* Error Message */}
+                {isError && (
+                  <div className="mt-6 rounded-lg bg-red-50 dark:bg-red-900/20 p-4 text-center">
+                    <div className="flex items-center justify-center gap-2 text-red-600 dark:text-red-400">
+                      <AlertCircle className="h-5 w-5" />
+                      <span className="font-medium">Submission failed</span>
+                    </div>
+                    <p className="mt-1 text-sm text-red-600/80 dark:text-red-400/80">
+                      {errorMessage}
+                    </p>
+                  </div>
+                )}
+
+                {/* Note */}
+                <p className="mt-6 text-center text-xs text-muted-foreground">
+                  By submitting, you agree to our{" "}
+                  <a href="/privacy" className="text-primary hover:underline">
+                    Privacy Policy
+                  </a>
+                  . No credit card required.
+                </p>
               </div>
             </div>
           </div>
-        </section>
+        </div>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

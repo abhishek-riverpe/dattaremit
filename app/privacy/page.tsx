@@ -5,15 +5,15 @@ import { Footer } from "@/components/sections/Footer";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "Learn how DattaPay collects, uses, and protects your personal information. Our commitment to your privacy and data security.",
+    "Learn how DattaRemit collects, uses, and protects your personal information. Our commitment to your privacy and data security.",
   openGraph: {
-    title: "Privacy Policy | DattaPay",
+    title: "Privacy Policy | DattaRemit",
     description:
-      "Learn how DattaPay collects, uses, and protects your personal information.",
-    url: "https://dattapay.com/privacy",
+      "Learn how DattaRemit collects, uses, and protects your personal information.",
+    url: "https://dattaremit.com/privacy",
   },
   alternates: {
-    canonical: "https://dattapay.com/privacy",
+    canonical: "https://dattaremit.com/privacy",
   },
 };
 
@@ -23,9 +23,9 @@ const sections = [
   { title: "3. Information Sharing", content: "We share information only as necessary: with payment partners, identity verification services, regulatory authorities, and service providers. We never sell personal information to third parties." },
   { title: "4. Data Security", content: "We implement 256-bit SSL encryption in transit, AES-256 at rest, two-factor authentication, regular independent security audits, and strict employee access controls." },
   { title: "5. Data Retention", content: "We retain information while your account is active or as needed for services. Certain information is retained as required by law, for dispute resolution, and agreement enforcement." },
-  { title: "6. Your Rights", content: "Depending on jurisdiction, you may access, correct, delete your information, restrict processing, request portability, and withdraw marketing consent. Contact privacy@dattapay.com." },
+  { title: "6. Your Rights", content: "Depending on jurisdiction, you may access, correct, delete your information, restrict processing, request portability, and withdraw marketing consent. Contact privacy@dattaremit.com." },
   { title: "7. Cookies and Tracking", content: "We use cookies and tracking technologies to enhance experience, analyze usage, and personalize content. Manage preferences through browser settings. Essential cookies cannot be disabled." },
-  { title: "8. Contact Us", content: "Questions about this policy? Contact our Data Protection Officer at privacy@dattapay.com or: DattaPay, 100 Financial District, Suite 400, San Francisco, CA 94111." },
+  { title: "8. Contact Us", content: "Questions about this policy? Contact our Data Protection Officer at privacy@dattaremit.com or: DattaRemit, 100 Financial District, Suite 400, San Francisco, CA 94111." },
 ];
 
 export default function PrivacyPage() {

@@ -7,15 +7,15 @@ import { ArrowRight, Calendar, Clock, BookOpen } from "lucide-react";
 export const metadata: Metadata = {
   title: "Blog",
   description:
-    "Stay informed about cross-border payments, international money transfer tips, exchange rates, and the latest fintech trends from DattaPay.",
+    "Stay informed about cross-border payments, international money transfer tips, exchange rates, and the latest fintech trends from DattaRemit.",
   openGraph: {
-    title: "Blog | DattaPay",
+    title: "Blog | DattaRemit",
     description:
       "Stay informed about cross-border payments, international money transfer tips, and fintech trends.",
-    url: "https://dattapay.com/blogs",
+    url: "https://dattaremit.com/blogs",
   },
   alternates: {
-    canonical: "https://dattapay.com/blogs",
+    canonical: "https://dattaremit.com/blogs",
   },
 };
 
@@ -94,7 +94,7 @@ export default function BlogsPage() {
                 Insights & Updates
               </h1>
               <p className="text-xl text-muted-foreground">
-                Stay informed about cross-border payments, financial tips, and the latest from DattaPay.
+                Stay informed about cross-border payments, financial tips, and the latest from DattaRemit.
               </p>
             </div>
           </div>

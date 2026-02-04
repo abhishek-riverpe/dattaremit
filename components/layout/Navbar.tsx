@@ -23,7 +23,7 @@ export function Navbar() {
         <Link href="/" className="flex items-center">
           <Image
             src="/logo.png"
-            alt="DattaPay Logo"
+            alt="DattaRemit Logo"
             width={120}
             height={40}
             className="h-10 w-auto"

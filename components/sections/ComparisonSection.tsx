@@ -10,7 +10,7 @@ const comparisonData = [
     time: "3-5 days",
   },
   {
-    provider: "DattaPay",
+    provider: "DattaRemit",
     amount: "₹84,520",
     fees: "$0",
     time: "<1 min",
@@ -33,7 +33,7 @@ export function ComparisonSection() {
             Get more INR per USD
           </h2>
           <p className="text-lg text-muted-foreground">
-            See how much $1000 gets you with DattaPay vs traditional methods
+            See how much $1000 gets you with DattaRemit vs traditional methods
           </p>
         </div>
 

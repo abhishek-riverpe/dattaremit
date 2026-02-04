@@ -3,17 +3,17 @@ import { Quote } from "lucide-react";
 const testimonials = [
   {
     name: "Swaraj Kashyap",
-    quote: "DattaPay is great. I get the best rates everytime.",
+    quote: "DattaRemit is great. I get the best rates everytime.",
     avatar: "SK",
   },
   {
     name: "Swati Maini",
-    quote: "DattaPay has the most seamless experience. Super simple and super fast.",
+    quote: "DattaRemit has the most seamless experience. Super simple and super fast.",
     avatar: "SM",
   },
   {
     name: "Mahima Sharma",
-    quote: "I was recommended DattaPay by a friend. I now use it every month to send money to my parents.",
+    quote: "I was recommended DattaRemit by a friend. I now use it every month to send money to my parents.",
     avatar: "MS",
   },
 ];
@@ -29,7 +29,7 @@ export function TestimonialsSection() {
             Delightful to use
           </h2>
           <p className="text-xl text-muted-foreground">
-            Join thousands of happy customers who trust DattaPay for their money transfers
+            Join thousands of happy customers who trust DattaRemit for their money transfers
           </p>
         </div>
 

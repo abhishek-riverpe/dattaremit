@@ -35,7 +35,7 @@ export function HeroSection() {
             <div className="absolute inset-0 bg-linear-to-br from-primary/20 to-primary/5 rounded-3xl blur-3xl" />
             <Image
               src="/hero.png"
-              alt="DattaPay App"
+              alt="DattaRemit App"
               width={750}
               height={750}
               className="relative z-10 w-[90%] md:w-auto h-auto md:max-w-112.5 lg:max-w-137.5"
