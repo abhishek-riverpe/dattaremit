@@ -1,58 +1,109 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Check } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
 
-const comparisonData = [
+const SEND_AMOUNT = 1000;
+const FALLBACK_RATE = 83.5;
+
+const providers = [
   {
-    provider: "DattaRemit",
+    id: "dattaremit",
+    name: "DattaRemit",
     logo: "/logo.png",
     logoSize: "h-12 w-36",
     logoSizeMobile: "h-10 w-32",
-    exchangeRate: "91.15",
-    transferFee: "$0",
-    recipientGets: "₹91,150",
+    rateMultiplier: 1.0,
+    fee: 0,
     highlight: true,
   },
   {
-    provider: "Wise",
+    id: "wise",
+    name: "Wise",
     logo: "/wise.png",
     logoSize: "h-12 w-32",
     logoSizeMobile: "h-10 w-28",
-    exchangeRate: "90.36",
-    transferFee: "$6.15",
-    recipientGets: "₹89,804",
+    rateMultiplier: 0.992,
+    fee: 6.15,
   },
   {
-    provider: "Remitly",
+    id: "remitly",
+    name: "Remitly",
     logo: "/remitly.png",
     logoSize: "h-10 w-28",
     logoSizeMobile: "h-8 w-24",
-    exchangeRate: "90.05",
-    transferFee: "$0",
-    recipientGets: "₹90,050",
+    rateMultiplier: 0.988,
+    fee: 0,
   },
   {
-    provider: "Skrill",
+    id: "skrill",
+    name: "Skrill",
     logo: "/skrill.png",
     logoSize: "h-8 w-20",
     logoSizeMobile: "h-6 w-16",
-    exchangeRate: "86.75",
-    transferFee: "$0",
-    recipientGets: "₹86,750",
+    rateMultiplier: 0.95,
+    fee: 0,
   },
   {
-    provider: "Payoneer",
-    logo: "/payoneer.png",
+    id: "xoom",
+    name: "Xoom",
+    logo: "/xoom.png",
     logoSize: "h-10 w-28",
     logoSizeMobile: "h-8 w-24",
-    exchangeRate: "88.55",
-    transferFee: "$1.50",
-    recipientGets: "₹88,417",
+    rateMultiplier: 0.975,
+    fee: 2.99,
+    invertInDark: true,
   },
 ];
 
+function formatINR(amount: number): string {
+  return new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(amount);
+}
+
 export function ComparisonSection() {
+  const [baseRate, setBaseRate] = useState<number>(FALLBACK_RATE);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const fetchExchangeRate = useCallback(async () => {
+    try {
+      const response = await fetch(
+        "https://api.frankfurter.app/latest?from=USD&to=INR"
+      );
+      if (!response.ok) throw new Error("Failed to fetch rate");
+      const data = await response.json();
+      setBaseRate(data.rates.INR);
+    } catch (error) {
+      console.error("Error fetching exchange rate:", error);
+      setBaseRate(FALLBACK_RATE);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchExchangeRate();
+  }, [fetchExchangeRate]);
+
+  const comparisonData = providers.map((provider) => {
+    const exchangeRate = baseRate * provider.rateMultiplier;
+    const recipientGets = (SEND_AMOUNT - provider.fee) * exchangeRate;
+
+    return {
+      ...provider,
+      exchangeRate: exchangeRate.toFixed(2),
+      transferFee: provider.fee === 0 ? "$0" : `$${provider.fee.toFixed(2)}`,
+      recipientGets: formatINR(recipientGets),
+    };
+  });
+
   return (
     <section className="py-24 bg-muted/30">
       <div className="container mx-auto px-4">
@@ -80,7 +131,7 @@ export function ComparisonSection() {
             <div className="divide-y">
               {comparisonData.map((row) => (
                 <div
-                  key={row.provider}
+                  key={row.id}
                   className={`grid grid-cols-4 items-center ${
                     row.highlight
                       ? "border-2 border-primary bg-primary/5"
@@ -91,27 +142,37 @@ export function ComparisonSection() {
                     <div className={`relative ${row.logoSize} flex-shrink-0`}>
                       <Image
                         src={row.logo}
-                        alt={row.provider}
+                        alt={row.name}
                         fill
-                        className="object-contain object-left"
+                        className={`object-contain object-left ${row.invertInDark ? "dark:invert" : ""}`}
                       />
                     </div>
                   </div>
                   <div className={`px-6 py-4 text-center ${row.highlight ? "font-semibold" : ""}`}>
-                    {row.exchangeRate}
+                    {isLoading ? (
+                      <span className="inline-block w-16 h-5 bg-muted animate-pulse rounded" />
+                    ) : (
+                      row.exchangeRate
+                    )}
                   </div>
                   <div className={`px-6 py-4 text-center ${row.highlight ? "font-semibold" : ""}`}>
                     {row.transferFee}
                   </div>
                   <div className="px-6 py-4 text-center">
-                    <span className={`font-semibold ${row.highlight ? "" : "text-foreground"}`}>
-                      {row.recipientGets}
-                    </span>
-                    {row.highlight && (
-                      <div className="flex items-center justify-center gap-1 text-sm text-primary mt-1">
-                        <Check className="size-4" />
-                        <span>Best value</span>
-                      </div>
+                    {isLoading ? (
+                      <span className="inline-block w-20 h-5 bg-muted animate-pulse rounded" />
+                    ) : (
+                      <>
+                        <span className={`font-semibold ${row.highlight ? "" : "text-foreground"}`}>
+                          {row.recipientGets}
+                        </span>
+                        {row.highlight && (
+                          <div className="flex items-center justify-center gap-1 text-sm text-primary mt-1">
+                            <Check className="size-4" />
+                            <span>Best value</span>
+                          </div>
+                        )}
+                      </>
                     )}
                   </div>
                 </div>
@@ -125,7 +186,7 @@ export function ComparisonSection() {
           <div className="rounded-xl border bg-background overflow-hidden divide-y">
             {comparisonData.map((row) => (
               <div
-                key={row.provider}
+                key={row.id}
                 className={`p-4 ${
                   row.highlight
                     ? "border-2 border-primary bg-primary/5"
@@ -136,9 +197,9 @@ export function ComparisonSection() {
                   <div className={`relative ${row.logoSizeMobile} flex-shrink-0`}>
                     <Image
                       src={row.logo}
-                      alt={row.provider}
+                      alt={row.name}
                       fill
-                      className="object-contain object-left"
+                      className={`object-contain object-left ${row.invertInDark ? "dark:invert" : ""}`}
                     />
                   </div>
                 </div>
@@ -148,9 +209,13 @@ export function ComparisonSection() {
                     <div className="text-xs text-muted-foreground">
                       Exchange rate
                     </div>
-                    <div className={row.highlight ? "font-semibold" : ""}>
-                      {row.exchangeRate}
-                    </div>
+                    {isLoading ? (
+                      <span className="inline-block w-12 h-4 bg-muted animate-pulse rounded" />
+                    ) : (
+                      <div className={row.highlight ? "font-semibold" : ""}>
+                        {row.exchangeRate}
+                      </div>
+                    )}
                   </div>
                   <div>
                     <div className="text-xs text-muted-foreground">
@@ -164,9 +229,13 @@ export function ComparisonSection() {
                     <div className="text-xs text-muted-foreground">
                       Recipient gets
                     </div>
-                    <div className="font-semibold">
-                      {row.recipientGets}
-                    </div>
+                    {isLoading ? (
+                      <span className="inline-block w-14 h-4 bg-muted animate-pulse rounded" />
+                    ) : (
+                      <div className="font-semibold">
+                        {row.recipientGets}
+                      </div>
+                    )}
                   </div>
                 </div>
 

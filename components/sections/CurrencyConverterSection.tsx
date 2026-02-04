@@ -198,7 +198,7 @@ export function CurrencyConverterSection() {
                   </div>
                   <div className="mt-3 py-2.5 px-4 bg-primary/10 rounded-lg text-center">
                     <p className="text-sm sm:text-base text-primary font-bold">
-                      Zero fee for first two transfers
+                      Zero fee for every transfer
                     </p>
                   </div>
                 </div>
