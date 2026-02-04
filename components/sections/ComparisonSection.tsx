@@ -1,26 +1,54 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Check } from "lucide-react";
 
 const comparisonData = [
   {
-    provider: "Traditional Bank",
-    amount: "₹80,100",
-    fees: "$30",
-    time: "3-5 days",
-  },
-  {
     provider: "DattaRemit",
-    amount: "₹84,520",
-    fees: "$0",
-    time: "<1 min",
+    logo: "/logo.png",
+    logoSize: "h-12 w-36",
+    logoSizeMobile: "h-10 w-32",
+    exchangeRate: "91.15",
+    transferFee: "$0",
+    recipientGets: "₹91,150",
     highlight: true,
   },
   {
-    provider: "Wire Transfer",
-    amount: "₹81,200",
-    fees: "$45",
-    time: "1-2 days",
+    provider: "Wise",
+    logo: "/wise.png",
+    logoSize: "h-12 w-32",
+    logoSizeMobile: "h-10 w-28",
+    exchangeRate: "90.36",
+    transferFee: "$6.15",
+    recipientGets: "₹89,804",
+  },
+  {
+    provider: "Remitly",
+    logo: "/remitly.png",
+    logoSize: "h-10 w-28",
+    logoSizeMobile: "h-8 w-24",
+    exchangeRate: "90.05",
+    transferFee: "$0",
+    recipientGets: "₹90,050",
+  },
+  {
+    provider: "Skrill",
+    logo: "/skrill.png",
+    logoSize: "h-8 w-20",
+    logoSizeMobile: "h-6 w-16",
+    exchangeRate: "86.75",
+    transferFee: "$0",
+    recipientGets: "₹86,750",
+  },
+  {
+    provider: "Payoneer",
+    logo: "/payoneer.png",
+    logoSize: "h-10 w-28",
+    logoSizeMobile: "h-8 w-24",
+    exchangeRate: "88.55",
+    transferFee: "$1.50",
+    recipientGets: "₹88,417",
   },
 ];
 
@@ -38,14 +66,14 @@ export function ComparisonSection() {
         </div>
 
         {/* Desktop Table */}
-        <div className="hidden md:block max-w-3xl mx-auto">
+        <div className="hidden md:block max-w-4xl mx-auto">
           <div className="rounded-xl border bg-background overflow-hidden">
             {/* Header Row */}
             <div className="grid grid-cols-4 bg-muted/50 text-sm font-medium text-muted-foreground">
               <div className="px-6 py-4">Provider</div>
-              <div className="px-6 py-4">You Get</div>
-              <div className="px-6 py-4">Fees</div>
-              <div className="px-6 py-4">Time</div>
+              <div className="px-6 py-4 text-center">Exchange rate</div>
+              <div className="px-6 py-4 text-center">Transfer fee</div>
+              <div className="px-6 py-4 text-center">Recipient gets</div>
             </div>
 
             {/* Data Rows */}
@@ -53,37 +81,36 @@ export function ComparisonSection() {
               {comparisonData.map((row) => (
                 <div
                   key={row.provider}
-                  className={`grid grid-cols-4 ${
+                  className={`grid grid-cols-4 items-center ${
                     row.highlight
-                      ? "border-l-4 border-l-primary bg-primary/5 font-semibold"
+                      ? "border-2 border-primary bg-primary/5"
                       : ""
                   }`}
                 >
-                  <div className="px-6 py-4">
-                    {row.provider}
+                  <div className="px-6 py-4 flex items-center">
+                    <div className={`relative ${row.logoSize} flex-shrink-0`}>
+                      <Image
+                        src={row.logo}
+                        alt={row.provider}
+                        fill
+                        className="object-contain object-left"
+                      />
+                    </div>
                   </div>
-                  <div
-                    className={`px-6 py-4 font-semibold ${
-                      row.highlight ? "text-primary" : ""
-                    }`}
-                  >
-                    {row.amount}
+                  <div className={`px-6 py-4 text-center ${row.highlight ? "font-semibold" : ""}`}>
+                    {row.exchangeRate}
                   </div>
-                  <div
-                    className={`px-6 py-4 ${
-                      row.highlight && row.fees === "$0"
-                        ? "text-primary font-medium"
-                        : ""
-                    }`}
-                  >
-                    {row.fees}
+                  <div className={`px-6 py-4 text-center ${row.highlight ? "font-semibold" : ""}`}>
+                    {row.transferFee}
                   </div>
-                  <div className="px-6 py-4">
-                    <div>{row.time}</div>
+                  <div className="px-6 py-4 text-center">
+                    <span className={`font-semibold ${row.highlight ? "" : "text-foreground"}`}>
+                      {row.recipientGets}
+                    </span>
                     {row.highlight && (
-                      <div className="flex items-center gap-1 text-sm text-primary mt-1">
+                      <div className="flex items-center justify-center gap-1 text-sm text-primary mt-1">
                         <Check className="size-4" />
-                        <span>Save ₹4,420</span>
+                        <span>Best value</span>
                       </div>
                     )}
                   </div>
@@ -101,47 +128,52 @@ export function ComparisonSection() {
                 key={row.provider}
                 className={`p-4 ${
                   row.highlight
-                    ? "border-l-4 border-l-primary bg-primary/5 font-semibold"
+                    ? "border-2 border-primary bg-primary/5"
                     : ""
                 }`}
               >
-                <div className="mb-3">
-                  {row.provider}
+                <div className="flex items-center mb-3">
+                  <div className={`relative ${row.logoSizeMobile} flex-shrink-0`}>
+                    <Image
+                      src={row.logo}
+                      alt={row.provider}
+                      fill
+                      className="object-contain object-left"
+                    />
+                  </div>
                 </div>
 
                 <div className="grid grid-cols-3 gap-2 text-sm">
                   <div>
-                    <div className="text-muted-foreground text-xs">You Get</div>
-                    <div
-                      className={`font-semibold ${
-                        row.highlight ? "text-primary" : ""
-                      }`}
-                    >
-                      {row.amount}
+                    <div className="text-xs text-muted-foreground">
+                      Exchange rate
+                    </div>
+                    <div className={row.highlight ? "font-semibold" : ""}>
+                      {row.exchangeRate}
                     </div>
                   </div>
                   <div>
-                    <div className="text-muted-foreground text-xs">Fees</div>
-                    <div
-                      className={
-                        row.highlight && row.fees === "$0"
-                          ? "text-primary font-medium"
-                          : ""
-                      }
-                    >
-                      {row.fees}
+                    <div className="text-xs text-muted-foreground">
+                      Transfer fee
+                    </div>
+                    <div className={row.highlight ? "font-semibold" : ""}>
+                      {row.transferFee}
                     </div>
                   </div>
                   <div>
-                    <div className="text-muted-foreground text-xs">Time</div>
-                    <div>{row.time}</div>
+                    <div className="text-xs text-muted-foreground">
+                      Recipient gets
+                    </div>
+                    <div className="font-semibold">
+                      {row.recipientGets}
+                    </div>
                   </div>
                 </div>
 
                 {row.highlight && (
-                  <div className="flex items-center gap-1 text-sm text-primary mt-3 pt-3 border-t">
+                  <div className="flex items-center gap-1 text-sm text-primary mt-3 pt-3 border-t border-primary/20">
                     <Check className="size-4" />
-                    <span>You save ₹4,420</span>
+                    <span>Best value</span>
                   </div>
                 )}
               </div>

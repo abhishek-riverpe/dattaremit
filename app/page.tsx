@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { HeroSection } from "@/components/sections/HeroSection";
+import { CurrencyConverterSection } from "@/components/sections/CurrencyConverterSection";
 import { ComparisonSection } from "@/components/sections/ComparisonSection";
 import { PaymentSection } from "@/components/sections/PaymentSection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
@@ -12,6 +13,7 @@ export default function Home() {
       <Navbar />
       <main>
         <HeroSection />
+        <CurrencyConverterSection />
         <ComparisonSection />
         <PaymentSection />
         <TestimonialsSection />
