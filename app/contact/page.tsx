@@ -40,7 +40,7 @@ const schema = yup.object({
     .string()
     .required("Email is required")
     .email("Please enter a valid email address"),
-  whatsapp: yup
+  whatsappNumber: yup
     .string()
     .required("WhatsApp number is required")
     .min(10, "Please enter a valid phone number"),
@@ -54,18 +54,6 @@ const schema = yup.object({
 type FormData = yup.InferType<typeof schema>;
 
 const features = [
-  {
-    icon: Globe,
-    text: "Receive payments in USD & EUR",
-  },
-  {
-    icon: TrendingUp,
-    text: "Earn 4.2% APY on idle funds",
-  },
-  {
-    icon: BadgePercent,
-    text: "Flat 0.5% fee - no hidden charges",
-  },
   {
     icon: Shield,
     text: "Bank-grade security & compliance",
@@ -87,7 +75,7 @@ export default function ContactPage() {
     defaultValues: {
       fullName: "",
       email: "",
-      whatsapp: "",
+      whatsappNumber: "",
       message: "",
     },
   });
@@ -107,7 +95,7 @@ export default function ContactPage() {
     setIsError(false);
     setIsSuccess(false);
     try {
-      await apiClient.post("/contact", {...data, "source": "DATTAREMIT"});
+      await apiClient.post("/contact", { ...data, source: "DATTAREMIT" });
 
       setIsSuccess(true);
       form.reset();
@@ -117,7 +105,9 @@ export default function ContactPage() {
       if (axios.isAxiosError(error) && error.response?.data?.error) {
         setErrorMessage(error.response.data.error);
       } else {
-        setErrorMessage("Network error. Please check your connection and try again.");
+        setErrorMessage(
+          "Network error. Please check your connection and try again.",
+        );
       }
     } finally {
       setIsLoading(false);
@@ -250,7 +240,7 @@ export default function ContactPage() {
                     {/* WhatsApp */}
                     <FormField
                       control={form.control}
-                      name="whatsapp"
+                      name="whatsappNumber"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>WhatsApp Number</FormLabel>
