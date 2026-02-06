@@ -1,23 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import axios from "axios";
-import {
-  ArrowRight,
-  Check,
-  Mail,
-  Clock,
-  Globe,
-  TrendingUp,
-  Shield,
-  BadgePercent,
-  Loader2,
-  AlertCircle,
-} from "lucide-react";
-import apiClient from "@/lib/api-client";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { Button } from "@/components/ui/button";
@@ -30,6 +12,21 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import apiClient from "@/lib/api-client";
+import { yupResolver } from "@hookform/resolvers/yup";
+import axios from "axios";
+import {
+  AlertCircle,
+  ArrowRight,
+  Check,
+  Clock,
+  Loader2,
+  Mail,
+  Shield,
+} from "lucide-react";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
 
 const schema = yup.object({
   fullName: yup
@@ -40,7 +37,7 @@ const schema = yup.object({
     .string()
     .required("Email is required")
     .email("Please enter a valid email address"),
-  whatsappNumber: yup
+  whatsapp: yup
     .string()
     .required("WhatsApp number is required")
     .min(10, "Please enter a valid phone number"),
@@ -75,7 +72,7 @@ export default function ContactPage() {
     defaultValues: {
       fullName: "",
       email: "",
-      whatsappNumber: "",
+      whatsapp: "",
       message: "",
     },
   });
@@ -240,7 +237,7 @@ export default function ContactPage() {
                     {/* WhatsApp */}
                     <FormField
                       control={form.control}
-                      name="whatsappNumber"
+                      name="whatsapp"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>WhatsApp Number</FormLabel>
