@@ -78,6 +78,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: siteUrl,
   },
+  other: {
+    "trustpilot-one-time-domain-verification-id":
+      "f48e33c1-bfa3-4b10-8b16-3d15779c5c74",
+  },
 };
 
 const jsonLd = {
