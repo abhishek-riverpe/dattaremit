@@ -78,11 +78,7 @@ const sections: Section[] = [
     intro:
       "We apply layered technical and organisational controls to protect personal information. The most important are:",
     items: [
-<<<<<<< HEAD
-      "Field-level encryption of highly sensitive personal data (name, date of birth, phone number, email, bank account number, bank routing identifiers, etc.) using AES-256-GCM with master keys stored in AWS Key Management Service.",
-=======
       "Field-level encryption of highly sensitive personal data (name, date of birth, phone number, email, bank account number, IFSC, etc.) using AES-256-GCM with master keys stored in a secure vault Service.",
->>>>>>> 319ad57 (Removed unnecessary statements)
       "Blind indexing (HMAC-SHA256) so that exact-match lookups work on encrypted data without the plaintext ever being stored.",
       "TLS 1.2 or higher on all client–server and service-to-service links, with HSTS preload enabled.",
       "Strict Content Security Policy, X-Frame-Options DENY, and other hardened security headers on our web properties.",
