@@ -74,26 +74,19 @@ const sections: Section[] = [
     ],
   },
   {
-    title: "5. Legal bases (EEA/UK residents)",
-    intro:
-      "If you are located in the European Economic Area or the United Kingdom, we process your personal information on the following legal bases:",
-    items: [
-      "Performance of a contract: to deliver the Service you have asked us to provide, including executing transfers and providing account access.",
-      "Compliance with a legal obligation: to meet KYC, AML, sanctions, tax, and record-keeping requirements that apply to us or to our regulated partner.",
-      "Legitimate interests: to secure our platform against fraud and abuse, to investigate suspicious activity, to improve the Service, and to communicate with customers about material changes. Where we rely on legitimate interests we have considered and balanced them against your rights.",
-      "Consent: for marketing communications, optional analytics, and any other processing where consent is the appropriate basis. You can withdraw consent at any time.",
-    ],
-  },
-  {
     title: "8. How we protect your information",
     intro:
       "We apply layered technical and organisational controls to protect personal information. The most important are:",
     items: [
+<<<<<<< HEAD
       "Field-level encryption of highly sensitive personal data (name, date of birth, phone number, email, bank account number, bank routing identifiers, etc.) using AES-256-GCM with master keys stored in AWS Key Management Service.",
+=======
+      "Field-level encryption of highly sensitive personal data (name, date of birth, phone number, email, bank account number, IFSC, etc.) using AES-256-GCM with master keys stored in a secure vault Service.",
+>>>>>>> 319ad57 (Removed unnecessary statements)
       "Blind indexing (HMAC-SHA256) so that exact-match lookups work on encrypted data without the plaintext ever being stored.",
       "TLS 1.2 or higher on all client–server and service-to-service links, with HSTS preload enabled.",
       "Strict Content Security Policy, X-Frame-Options DENY, and other hardened security headers on our web properties.",
-      "Strong authentication through Clerk, with email-code step-up on sensitive actions on the web and Face ID / fingerprint gating on mobile.",
+      "Strong authentication, with email-code step-up on sensitive actions on the web and Face ID / fingerprint gating on mobile.",
       "Idempotency keys and HMAC-signed webhooks (with a five-minute replay window) to protect financial operations.",
       "Structured logs with automatic PII redaction, so sensitive fields never appear in log files or error-tracking systems.",
       "Continuous security review: Semgrep SAST on every change, bun audit on every CI run, and Trivy container scanning before deployment.",
@@ -127,15 +120,14 @@ const sections: Section[] = [
       "Portability: to receive your information in a structured, machine-readable format and to transmit it to another controller where technically feasible.",
       "Withdrawal of consent: where we rely on consent (for example, for marketing), you can withdraw it at any time without affecting the lawfulness of prior processing.",
       "Do-not-sell / share and limit sensitive data: California residents may request that we limit the use of sensitive personal information; because we do not sell or share personal information for cross-context behavioural advertising, these rights are respected by default.",
-      "Lodge a complaint: you have the right to lodge a complaint with your data-protection authority or, in the United States, the relevant state attorney general.",
     ],
     outro:
-      "To exercise any of these rights, email privacy@dattaremit.com. We may need to verify your identity before acting on a request.",
+      "To exercise any of these rights, email support@dattaremit.com. We may need to verify your identity before acting on a request.",
   },
   {
     title: "11. Children",
     content:
-      "The Service is for adults only. You must be at least 18 years old to create an account or initiate a transfer. We do not knowingly collect personal information from anyone under 18. If we become aware that we have collected information from a minor, we will delete it promptly. If you believe a minor has used the Service, please contact us at privacy@dattaremit.com.",
+      "The Service is for adults only. You must be at least 18 years old to create an account or initiate a transfer. We do not knowingly collect personal information from anyone under 18. If we become aware that we have collected information from a minor, we will delete it promptly. If you believe a minor has used the Service, please contact us at support@dattaremit.com.",
   },
   {
     title: "12. Cookies and similar technologies",
@@ -145,7 +137,7 @@ const sections: Section[] = [
   {
     title: "13. Automated decision-making",
     content:
-      "We apply automated rules to help detect fraud, prevent duplicate transfers (idempotency), and screen transactions against sanctions and other restricted-party lists. These automated checks may cause a transfer to be held or declined. Where a decision with a legal or similarly significant effect is made solely by automated means, you have the right to ask for human review. Contact privacy@dattaremit.com to exercise that right.",
+      "We apply automated rules to help detect fraud, prevent duplicate transfers (idempotency), and screen transactions against sanctions and other restricted-party lists. These automated checks may cause a transfer to be held or declined. Where a decision with a legal or similarly significant effect is made solely by automated means, you have the right to ask for human review. Contact support@dattaremit.com to exercise that right.",
   },
   {
     title: "14. Third-party websites and services",
@@ -160,7 +152,7 @@ const sections: Section[] = [
   {
     title: "16. Contact us",
     content:
-      "For any question or request about this Privacy Policy, or to exercise any of the rights above, please write to privacy@dattaremit.com. You can also reach our support team at support@dattaremit.com and our compliance team at compliance@dattaremit.com. If you would prefer to write by post, contact us for our current registered address.",
+      "For any question or request about this Privacy Policy, or to exercise any of the rights above, please write to support@dattaremit.com. You can also reach our support team at support@dattaremit.com and our compliance team at support@dattaremit.com. If you would prefer to write by post, contact us for our current registered address.",
   },
 ];
 
